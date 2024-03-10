@@ -23,6 +23,14 @@ form.addEventListener('submit', handlerSubmit);
 
 function handlerSubmit(event) {
   event.preventDefault();
+  if (button.textContent === 'Logout') {
+    localStorage.removeItem(STORAGEKEY);
+    form.reset();
+    inputs.forEach(input => input.removeAttribute('readonly'));
+    button.textContent = 'Login';
+    return;
+  }
+
   const emailValue = event.target.elements.email.value.trim();
   const passwordValue = event.target.elements.password.value.trim();
   if (emailValue === '' || passwordValue === '') {
@@ -42,6 +50,18 @@ function handlerSubmit(event) {
     STORAGEKEY,
     JSON.stringify({ email: emailValue, password: passwordValue })
   );
+  button.textContent = 'Logout';
+  inputs.forEach(input => input.setAttribute('readonly', true));
+}
+
+const saveData = localStorage.getItem(STORAGEKEY);
+
+if (saveData) {
+  const parsedData = JSON.parse(saveData);
+
+  inputs[0].value = parsedData.email || '';
+  inputs[1].value = parsedData.password || '';
+
   button.textContent = 'Logout';
   inputs.forEach(input => input.setAttribute('readonly', true));
 }
