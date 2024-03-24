@@ -8,7 +8,7 @@ export class UnsplashAPI {
     }?page=${page}&query=popular&per_page=12&orientation=portrait&client_id=${
       this.#API_KEY
     }`;
-    fetch(url).then(response => {
+    return fetch(url).then(response => {
       if (!response.ok) {
         throw new Error(response.status);
       }
