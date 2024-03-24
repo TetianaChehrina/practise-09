@@ -9,6 +9,8 @@
 
 // Якщо введені дані не збігаються з потрібними даними, викликати аlert і
 // повідомляти про помилку.
+
+import './promise.js';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 const USER_DATA = {
